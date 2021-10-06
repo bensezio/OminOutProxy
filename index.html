@@ -1,0 +1,652 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">  -->
+    <title>Vlocity OmniScript LWC Components</title>
+    <!-- Block zoom -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="shortcut icon" href="/vlocityresources/favicon.ico" />
+
+    <!-- SLDS styles -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/slds/assets/styles/salesforce-lightning-design-system.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/newport/assets/styles/vlocity-newport-design-system.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vlocityresources/slds/styles/OmniLwcUtilsCss.css"
+    />
+
+    <!-- OmniScript PDF Action -->
+    <!--
+      You will need to add this resource to your application if your OmniScript
+      has a PDF Action
+    -->
+    <script src="/vlocityresources/javascript/VlocityPdf.js"></script>
+
+    <!-- jsForce -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js"></script>
+
+    <!-- Google Maps Api -->
+    <!--
+    To enable the google maps autocomplete typeahead feature for omniout, uncomment the script below and
+    replace {YOUR_API_KEY_HERE} with your google maps api key.
+    -->
+    <!--
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key={YOUR_API_KEY_HERE}&libraries=places">
+    </script>
+    -->
+
+    <link
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?ver=5.0.3'"
+    />
+
+    <style>
+      body {
+        position: absolute;
+        min-height: 101%;
+        width: 100%;
+        background: #f0f0f0;
+        color: #6d6e71;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .header {
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 145px;
+        border-bottom: 10px solid #e03127;
+        position: relative;
+        background: white;
+      }
+
+      .header .logo {
+        position: absolute;
+        width: 100%;
+        height: 0;
+        z-index: 10;
+      }
+
+      .header .logo .pad {
+        max-width: 960px;
+        margin: 46px auto 0 auto;
+        padding: 0 10px;
+        height: 40px;
+      }
+
+      .header .logo .pad h2 {
+        width: 80px;
+        height: 80px;
+        background-image: url("https://www.atlas.com.mt/wp-content/themes/atlas1/assets/img/logo-atlas-insurance-160x160.png");
+        background-size: 80px 80px;
+        margin: auto;
+      }
+
+      .header .logo .pad h2 a {
+        display: block;
+        width: 80px;
+        height: 80px;
+      }
+
+      .header .logo .pad h2 span {
+        margin-left: -9999px;
+      }
+
+      .header .heads {
+        width: 100%;
+        background: #f0f0f0;
+      }
+
+      .header .heads .head1 {
+        position: relative;
+      }
+
+      .header .heads .head1 .pad {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 20px;
+        overflow: hidden;
+        height: 36px;
+        font-family: "Montserrat";
+        text-transform: uppercase;
+        font-size: 11px;
+        line-height: 1.8em;
+      }
+
+      .vlocity {
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+        background: white;
+      }
+
+      .footer3 {
+        background-color: #f0f0f0;
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .footer3 .pad {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 10px;
+        overflow: hidden;
+      }
+
+      .footer3 .pad ul.menu {
+        border-top: 1px solid #bfc1c3;
+        overflow: hidden;
+        font-size: 13px;
+        line-height: 1.25em;
+        font-weight: 300;
+        padding-top: 20px;
+      }
+
+      .footer3 .pad ul.menu li {
+        float: left;
+        padding-left: 9px;
+        margin-left: 9px;
+        border-left: 1px solid #6d6e71;
+      }
+
+      .footer3 .pad ul.menu li:first-child {
+        padding-left: 0;
+        margin-left: 0;
+        border-left: none;
+      }
+
+      .footer3 .pad ul.menu li a {
+        color: #6d6e71;
+      }
+
+      .footer3 .pad ul.menu li a:hover {
+        color: #231120;
+      }
+
+      @media handheld, screen and (max-width: 1024px) {
+        .footer3 .pad ul.menu {
+          text-align: center;
+        }
+
+        .footer3 .pad ul.menu li {
+          float: none;
+          display: inline-block;
+          padding-left: 0;
+          margin-left: 0;
+          border-left: none;
+          margin: 0 10px 10px 10px;
+        }
+      }
+
+      .theme_footersocial_wrap {
+        overflow: hidden;
+        min-height: 56px;
+        margin: 0 0 30px 0;
+        color: #231120;
+      }
+
+      .theme_footersocial_wrap .text {
+        float: left;
+        padding-left: 100px;
+        background: url(https://www.atlas.com.mt/wp-content/themes/atlas1/assets/img/logo-atlas-insurance-112x112.png)
+          0% 0% no-repeat;
+        background-size: 56px 56px;
+        min-height: 56px;
+        padding-top: 20px;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.25em;
+      }
+
+      .theme_footersocial_wrap .text .address {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .theme_footersocial_wrap .text .tel {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .theme_footersocial_wrap .text .email {
+        display: inline-block;
+      }
+
+      .theme_footersocial_wrap .social {
+        float: right;
+        padding-top: 10px;
+      }
+
+      .theme_footersocial_wrap .social a {
+        display: inline-block;
+        text-align: center;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        background: #ccc;
+        border-radius: 18px;
+        margin-left: 10px;
+      }
+
+      .theme_footersocial_wrap .social a.facebook {
+        background: #3b5998;
+      }
+
+      .theme_footersocial_wrap .social a.youtube {
+        background: #e52d27;
+      }
+
+      .theme_footersocial_wrap .social a.twitter {
+        background: #55acee;
+      }
+
+      .theme_footersocial_wrap .social a.linkedin {
+        background: #0077b5;
+      }
+
+      .theme_footersocial_wrap .social a i {
+        color: #fff;
+        vertical-align: middle;
+      }
+
+      @media handheld, screen and (max-width: 1024px) {
+        .theme_footersocial_wrap .text {
+          float: none;
+        }
+
+        .theme_footersocial_wrap .social {
+          float: none;
+          padding-top: 15px;
+        }
+
+        .theme_footersocial_wrap .social a {
+          margin-left: 0;
+          margin-right: 10px;
+        }
+      }
+
+      @media handheld, screen and (max-width: 777px) {
+        .theme_footersocial_wrap .text {
+          padding-left: 80px;
+          padding-top: 0;
+          min-height: 56px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 1.3em;
+        }
+
+        .theme_footersocial_wrap .text .address {
+          display: block;
+        }
+
+        .theme_footersocial_wrap .text .tel {
+          display: block;
+        }
+
+        .theme_footersocial_wrap .text .email {
+          display: block;
+        }
+      }
+
+      body.ext-webkit.ext-chrome.iframeresizer--child {
+        min-height: auto;
+      }
+
+      body.ext-webkit.ext-chrome.iframeresizer--child div.header {
+        display: none;
+      }
+
+      body.ext-webkit.ext-chrome.iframeresizer--child div.footer3 {
+        display: none;
+      }
+
+      body.ext-webkit.ext-chrome.iframeresizer--child
+        div#chat-widget-container {
+        display: none;
+      }
+
+      /*LWC specific styling*/
+      .lwc {
+        background-color: #f0f0f0;
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .omniscript-article {
+        border-radius: unset;
+        box-shadow: none;
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>
+      <div class="unsupported">
+        <div class="unsupported_title">LWC app can't be loaded!</div>
+        <div class="unsupported_message">
+          This application requires javascript to work properly.
+        </div>
+      </div>
+    </noscript>
+
+    <div id="outdated" style="display: none;">
+      <div class="unsupported">
+        <div class="unsupported_title">App can't be loaded!</div>
+        <div class="unsupported_message"></div>
+      </div>
+    </div>
+
+    <script nomodule>
+      const { outdated } = window;
+      outdated.style.display = "unset";
+      outdated.querySelector(".unsupported_message").textContent =
+        "This application requires a more recent version of your browser";
+    </script>
+
+    <script defer="defer">
+      /**
+       * A sample connection that uses jsForce to request data from the backend.
+       * This sample connection is for demo purposes and can be used to test
+       * the OmniOut LWC project locally. This connection sample is not intended
+       * to be used as production connection code.
+       **/
+      function JSForceConnectionExample() {
+        const getCookie = (cname) => {
+          const name = cname + "=";
+          const decodedCookie = decodeURIComponent(document.cookie);
+          const ca = decodedCookie.split(";");
+          for (let i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+            }
+          }
+          return "";
+        };
+
+        let currentCookieAccessToken = getCookie("oauthCookie");
+
+        const connection = new jsforce.Connection({
+          // Set your jsForce configuration here
+          //accessToken: currentCookieAccessToken,
+          //instanceUrl: "https://atlasinsurance--devpro.my.salesforce.com",
+          accessToken:
+            "00D3O0000008lH7!AQsAQMgI7h2o.ZlBAXRvg9tyxY_7cIc8_iKGbRZijHQjoy4XJtqOk8sSGQVbu4.TivHccQlAbb8kyS2ty8XaKUjq7RYxvLdi",
+          instanceUrl: "https://atlasinsurance--uat.my.salesforce.com",
+          //proxyUrl:
+          //  "https://tahczina99igbj:uvgcu2kjznvk4s8arsxzy4qn0v8m7@us-east-shield-02.quotaguard.com:9294",
+        });
+
+        /**
+         * Expose the request method
+         **/
+        this.request = request;
+
+        /**
+         * @type {string} The namespace of the package
+         **/
+        this.namespace = "vlocity_ins";
+
+        /**
+         * Instance Url for salesforce connection
+         **/
+        this.instanceUrl = connection.instanceUrl;
+
+        /**
+         * Assign the connection object
+         */
+        this.connection = connection;
+
+        /**
+         * A function that executes the HTTP requests.
+         * @type {string} The target URL.
+         * @type {Object} The data that will be sent to the target URL.
+         **/
+        function request(url, data) {
+          return connection.requestPost(url, data);
+        }
+      }
+
+      /**
+       * Once the component is ready, an event is dispatched to let the DOM knows that a connection is expected.
+       **/
+      document.addEventListener("omnioutcomponentready", (evt) => {
+        if (evt.detail && evt.detail.omnioutcomponent) {
+          evt.srcElement.connection = new JSForceConnectionExample();
+        }
+      });
+    </script>
+
+    <div class="header">
+      <div class="logo">
+        <div class="pad">
+          <h2>
+            <a href="https://www.atlas.com.mt"
+              ><span>Atlas Insurance Malta</span></a
+            >
+          </h2>
+        </div>
+      </div>
+      <div class="heads" id="heads">
+        <div class="head1"><div class="pad"></div></div>
+        <div class="head2"><div class="pad"></div></div>
+      </div>
+    </div>
+
+    <div class="lwc"></div>
+
+    <div id="atlas-footer" class="footer3">
+      <div class="pad">
+        <ul class="wa wa_footer wa_footer_3">
+          <li
+            id="theme_footersocial-2"
+            class="widget widget_theme_footersocial"
+          >
+            <div class="theme_footersocial_wrap">
+              <div class="text">
+                <div class="address">
+                  Head Office, 48-50 Ta' Xbiex Seafront, Ta' Xbiex.
+                </div>
+                <div class="tel">
+                  Tel: <a href="tel:23 43 53 63">23 43 53 63</a>
+                </div>
+                <div class="email">
+                  Email:
+                  <a href="mailto:insure@atlas.com.mt">insure@atlas.com.mt</a>
+                </div>
+              </div>
+              <div class="social">
+                <a
+                  class="facebook"
+                  href=" https://www.facebook.com/atlasmalta/"
+                  target="_blank"
+                  ><i class="fa fa-fw fa-lg fa-facebook"></i
+                ></a>
+                <a
+                  class="youtube"
+                  href="https://www.youtube.com/user/atlasInsurance"
+                  target="_blank"
+                  ><i class="fa fa-fw fa-lg fa-youtube-play"></i
+                ></a>
+                <a
+                  class="linkedin"
+                  href="https://www.linkedin.com/company/atlas-insurance-pcc-ltd"
+                  target="_blank"
+                  ><i class="fa fa-fw fa-lg fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </li>
+          <li id="nav_menu-7" class="widget widget_nav_menu">
+            <div class="menu-bottom-menu-container">
+              <ul id="menu-bottom-menu" class="menu">
+                <li
+                  id="menu-item-292"
+                  class="menu-item menu-item-type-custom menu-item-object-custom menu-item-292"
+                >
+                  <a href="#" target="_blank">© 2017 Atlas Group</a>
+                </li>
+                <li
+                  id="menu-item-299"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-299"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/copyright/"
+                    target="_blank"
+                    >Copyright</a
+                  >
+                </li>
+                <li
+                  id="menu-item-294"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-294"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/license/"
+                    target="_blank"
+                    >License to Operate</a
+                  >
+                </li>
+                <li
+                  id="menu-item-298"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/disclaimer/"
+                    target="_blank"
+                    >Disclaimer</a
+                  >
+                </li>
+                <li
+                  id="menu-item-295"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-295"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/jurisdiction/"
+                    target="_blank"
+                    >Law and Jurisdiction</a
+                  >
+                </li>
+                <li
+                  id="menu-item-4656"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4656"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/data-protection/"
+                    target="_blank"
+                    >Data Protection</a
+                  >
+                </li>
+                <li
+                  id="menu-item-297"
+                  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-297"
+                >
+                  <a
+                    href="https://www.atlas.com.mt/legal/transaction-info/"
+                    target="_blank"
+                    >Transaction Information</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- read window query params -->
+    <script>
+      function addElement() {
+        const urlparams = new URLSearchParams(window.location.search);
+        const page = urlparams.get("page");
+        let wrapper = document.getElementsByClassName("lwc");
+
+        switch (page) {
+          case "TravelQuote":
+            const travelQuoteOmnilwc = document.createElement(
+              "vlocityomniscript-atlas-d-x-travel-quote-english"
+            );
+            wrapper[0].appendChild(travelQuoteOmnilwc);
+
+            let travelQuoteOmnilwccomp = document.getElementsByTagName(
+              "vlocityomniscript-atlas-d-x-travel-quote-english"
+            )[0];
+            travelQuoteOmnilwccomp.setAttribute("layout", "newport");
+
+            console.log("added element: ", travelQuoteOmnilwccomp);
+            break;
+          //case "TravelQuoteTest":
+
+          //    const travelQuoteTestOmnilwc = document.createElement('vlocityomniscript-atlas-d-x-travel-quote_-omniout-english');
+          //    wrapper[0].appendChild(travelQuoteTestOmnilwc);
+
+          //    let travelQuoteTestOmnilwccomp = document.getElementsByTagName('vlocityomniscript-atlas-d-x-travel-quote_-omniout-english')[0];
+          //    travelQuoteTestOmnilwccomp.setAttribute("layout", 'lightning');
+          //    travelQuoteTestOmnilwccomp.setAttribute("run-mode", 'localScriptDef');
+
+          //    console.log('added element: ', travelQuoteTestOmnilwccomp);
+          //    break;
+          case "MotorRenewal":
+            const motorRenewalOmnilwc = document.createElement(
+              "vlocityomniscript-atlas-d-x-motor-renewal-self-service-english"
+            );
+            wrapper[0].appendChild(motorRenewalOmnilwc);
+
+            let motorRenewalOmnilwccomp = document.getElementsByTagName(
+              "vlocityomniscript-atlas-d-x-motor-renewal-self-service-english"
+            )[0];
+            motorRenewalOmnilwccomp.setAttribute("layout", "lightning");
+
+            console.log("added element: ", motorRenewalOmnilwccomp);
+            break;
+          case "QuoteDocumentation":
+            const orderId = urlparams.get("orderId");
+            const quoteDocumentationOmnilwc = document.createElement(
+              "vlocityomniscript-atlas-d-x-quote-documentation_-l-w-c-english"
+            );
+            wrapper[0].appendChild(quoteDocumentationOmnilwc);
+
+            let prefill = { transactionNumber: orderId };
+
+            let quoteDocumentationOmnilwccomp = document.getElementsByTagName(
+              "vlocityomniscript-atlas-d-x-quote-documentation_-l-w-c-english"
+            )[0];
+            quoteDocumentationOmnilwccomp.setAttribute("layout", "newport");
+            quoteDocumentationOmnilwccomp.setAttribute(
+              "prefill",
+              JSON.stringify(prefill)
+            );
+
+            console.log("added element: ", quoteDocumentationOmnilwccomp);
+            break;
+        }
+      }
+
+      addElement();
+    </script>
+  </body>
+</html>
