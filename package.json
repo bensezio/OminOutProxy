@@ -1,0 +1,60 @@
+{
+  "name": "vlocityomnioutlwc",
+  "main": "./scripts/server.js",
+  "description": "Vlocity OmniOut for LWC",
+  "version": "890.283.0",
+  "author": "Vlocity, Inc.",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "@salesforce-ux/design-system": "2.11.6",
+    "@vlocity-ins/calc": "890.283.0",
+    "@vlocity-ins/components": "890.283.0",
+    "@vlocity-ins/core": "^890.285.4",
+    "@vlocity-ins/ins": "890.283.0",
+    "@vlocity-ins/oui": "890.283.0",
+    "@vlocity-ins/platform": "890.283.0",
+    "@vlocity-ins/resources": "890.283.0",
+    "@vlocity-ins/rm": "890.283.0",
+    "@vlocity-ins/sdk": "890.283.0",
+    "compression": "1.7.4",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "dotenv-webpack": "1.7.0",
+    "express": "4.17.1",
+    "helmet": "^3.22.0",
+    "https-proxy-agent": "^5.0.0",
+    "jsforce": "1.9.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^ 2.29.1",
+    "postinstall": "*",
+    "request-promise": "^ 4.2.6"
+  },
+  "devDependencies": {
+    "eslint": "7.1.0",
+    "husky": "4.2.5",
+    "lint-staged": "10.2.6",
+    "lwc-services": "3.1.2",
+    "prettier": "2.0.5"
+  },
+  "engines": {
+    "node": ">=10.13.0",
+    "npm": ">=6.4.1",
+    "yarn": ">=1.9.4"
+  },
+  "scripts": {
+    "build": "lwc-services build -m production -w scripts/webpack.config.js",
+    "build:development": "lwc-services build -w scripts/webpack.config.js",
+    "lint": "eslint ./src/**/*.js",
+    "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+    "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+    "serve": "node scripts/server.js",
+    "test:unit": "lwc-services test:unit",
+    "test:unit:coverage": "lwc-services test:unit --coverage",
+    "test:unit:debug": "lwc-services test:unit --debug",
+    "test:unit:watch": "lwc-services test:unit --watch",
+    "watch": "lwc-services watch -w scripts/webpack.config.js",
+    "customlabels": "node scripts/getAllCustomLabels.js",
+    "heroku-postbuild": "npm run build",
+    "postinstall": "node scripts/postinstall.js"
+  }
+}

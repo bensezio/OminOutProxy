@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "npm": "@vlocity-ins/oui"
+    },
+    {
+      "npm": "@vlocity-ins/sdk"
+    },
+    {
+      "npm": "@vlocity-ins/resources"
+    },
+    {
+      "npm": "@vlocity-ins/core"
+    },
+    {
+      "npm": "@vlocity-ins/components"
+    },
+    {
+      "npm": "@vlocity-ins/calc"
+    },
+    {
+      "npm": "@vlocity-ins/rm"
+    },
+    {
+      "npm": "@vlocity-ins/ins"
+    },
+    {
+      "dir": "src/modules"
+    }
+  ],
+  "expose": []
+}
