@@ -20,8 +20,8 @@ const { JWT_SUBJECT, JWT_AUDIENCE, QUOTAGUARDSHIELD_URL } = process.env;
 
 // START HTTPS PROXY SETUP
 
-var testEndpoint = "https://atlasinsurance--uat.my.salesforce.com";
-var proxy = process.env.QUOTAGUARDSHIELD_URL;
+var testEndpoint = "https://mydomain.my.salesforce.com";
+var proxy = QUOTAGUARDSHIELD_URL; // process.env.QUOTAGUARDSHIELD_URL
 var agent = new HttpsProxyAgent(proxy);
 var options = {
   uri: url.parse(testEndpoint),
